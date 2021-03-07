@@ -10,7 +10,7 @@ class StudentChartPane extends ChartPane {
 
 	public StudentChartPane(boolean[][] stones, int row0, int column0, int actualMaxPathLength) {
 		super(stones, row0, column0);
-		chart[row0][row0].setText(Integer.toString(actualMaxPathLength));
+		chart[row0][column0].setText(Integer.toString(actualMaxPathLength));
 	}
 
 	@Override
