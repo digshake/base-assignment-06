@@ -1,6 +1,8 @@
-package assignment6;
+package assignment6.tests;
 
 import org.junit.Test;
+
+import assignment6.RecursiveMethods;
 
 import static org.junit.Assert.assertEquals;
 

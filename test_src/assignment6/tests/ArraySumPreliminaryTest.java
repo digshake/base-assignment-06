@@ -1,15 +1,18 @@
-package assignment6;
+package assignment6.tests;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import assignment6.RecursiveMethods;
+
 import static org.junit.Assert.*;
 
 /**
  * Methods that test the arraySum() method
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ArraySumTests {
+public class ArraySumPreliminaryTest {
     /**
      * Test the sum of {1}
      */
