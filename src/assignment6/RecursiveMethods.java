@@ -43,7 +43,8 @@ public class RecursiveMethods {
 	}
 
 	/**
-	 * Finds the length of the longest path in the given 2D array
+	 * Finds the length of the longest path in the given 2D array from the specified
+	 * start position.
 	 * 
 	 * @param chart 2D array of stones
 	 * @param r     start position row
