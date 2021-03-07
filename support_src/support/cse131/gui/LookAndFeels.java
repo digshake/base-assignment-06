@@ -1,7 +1,6 @@
 package support.cse131.gui;
 
 import javax.swing.Icon;
-import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
