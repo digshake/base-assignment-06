@@ -3,18 +3,17 @@ package assignment6;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import assignment6.tests.ArraySumComprehensiveTest;
-import assignment6.tests.ArraySumPreliminaryTest;
-import assignment6.tests.DragonTest;
-import assignment6.tests.ExponentTests;
-import assignment6.tests.MaxPathLengthTest;
+import assignment6.tests.ArraySumTestSuite;
+import assignment6.tests.DragonTestSuite;
+import assignment6.tests.ExponentTestSuite;
+import assignment6.tests.MaxPathLengthTestSuite;
 
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ExponentTests.class, ArraySumPreliminaryTest.class, ArraySumComprehensiveTest.class,
-		DragonTest.class, MaxPathLengthTest.class })
+@Suite.SuiteClasses({ ExponentTestSuite.class, ArraySumTestSuite.class, DragonTestSuite.class,
+		MaxPathLengthTestSuite.class })
 public class RecursiveMethodsTestSuite {
 
 }
