@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import assignment6.RecursiveMethods;
 
-public class ExponentTest {
+public class ExponentThoroughTest {
 
 	/**
 	 * Tests exponents with a positive value for the base and exponent
