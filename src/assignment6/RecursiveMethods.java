@@ -10,11 +10,13 @@ public class RecursiveMethods {
 	 * @return base ^ exponent
 	 */
 	public static double exponent(int base, int exp) {
-
-		// FIXME Recursively compute base^exp
-		return 0;
-
+		
+			// FIXME Recursively compute base^exp
+			return 0;
+			
 	}
+
+	
 
 	/**
 	 * Recursively compute the sum of elements in an array
@@ -23,10 +25,34 @@ public class RecursiveMethods {
 	 * @return the sum of the elements in values
 	 */
 	public static int arraySum(int[] array) {
+		
+			// FIXME: Recursively compute the sum of the values in an array
+			return 0;
+			
+	}
 
-		// FIXME: Recursively compute the sum of the values in an array
-		return 0;
-
+	/**
+	 * Return a new String which is the original source String with all occurrences
+	 * of the target character substituted by the replacement String.
+	 * 
+	 * @param source      the source String
+	 * @param target      the target character to be replaced
+	 * @param replacement the replacement String
+	 * 
+	 * @return the String which results from substituting all of the target
+	 *         characters in the source String with the replacement String
+	 */
+	public static String substituteAll(String source, char target, String replacement) {
+		String result = "";
+		for (int i = 0; i < source.length(); ++i) {
+			char ch = source.charAt(i);
+			if (ch == target) {
+				result = result + replacement;
+			} else {
+				result = result + ch;
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -36,11 +62,13 @@ public class RecursiveMethods {
 	 * @return the nth dragon curve
 	 */
 	public static String dragon(int n) {
-
-		// FIXME Recursively compute dragon curves
-		return "";
-
+		
+			// FIXME Recursively compute dragon curves
+			return "";
+			
 	}
+
+	
 
 	/**
 	 * Finds the length of the longest path in the given 2D array from the specified
@@ -52,9 +80,9 @@ public class RecursiveMethods {
 	 * @return the length of the longest path that was found
 	 */
 	public static int maxPathLength(boolean[][] chart, int r, int c) {
-
-		// FIXME Find and return the length of the longest path in the array
-		return 0;
-
+		
+			// FIXME Find and return the length of the longest path in the array
+			return 0;
+			
 	}
 }

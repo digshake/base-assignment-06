@@ -7,10 +7,12 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import assignment6.maxpath.Cell;
@@ -20,7 +22,7 @@ import support.cse131.gui.ThrowableDialogs;
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
-public class ScenarioPane extends JPanel {
+class ScenarioPane extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private boolean isCorrect;
@@ -39,9 +41,13 @@ public class ScenarioPane extends JPanel {
 	private static class StudentPane extends AbstractPane {
 		private static final long serialVersionUID = 1L;
 
-		public StudentPane(boolean[][] stones, int row0, int column0, int actualMaxPathLength) {
-			super(String.format("<html>Student<br/>RecursiveMethods.maxPathLength(): %d</html>", actualMaxPathLength),
-					new StudentChartPane(stones, row0, column0, actualMaxPathLength));
+		private static String toText(Optional<Integer> actualOpt) {
+			return actualOpt.isPresent() ? Integer.toString(actualOpt.get()) : "?";
+		}
+
+		public StudentPane(boolean[][] stones, int row0, int column0, Optional<Integer> actualOpt) {
+			super(String.format("<html>Student<br/>RecursiveMethods.maxPathLength(): %s</html>", toText(actualOpt)),
+					new StudentChartPane(stones, row0, column0, toText(actualOpt)));
 		}
 	}
 
@@ -68,7 +74,7 @@ public class ScenarioPane extends JPanel {
 		int expected = MaxPathLengthScenarios.lookupExpected(scenario);
 
 		JPanel header = new JPanel();
-		header.setLayout(new BoxLayout(header, BoxLayout.LINE_AXIS));
+		header.setLayout(new BorderLayout());
 
 		JLabel descriptionLabel = new JLabel();
 		descriptionLabel.setFont(descriptionLabel.getFont().deriveFont(Font.BOLD, 24.0f));
@@ -76,23 +82,40 @@ public class ScenarioPane extends JPanel {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html>");
 		sb.append(MaxPathLengthScenarios.lookupDescription(scenario));
-		sb.append(": ");
+		sb.append("<br/>");
+
+		Optional<Integer> actualOpt;
 		try {
 			int actual = actualFuture.get();
+			actualOpt = Optional.of(actual);
 			isCorrect = expected == actual;
 			if (isCorrect) {
 				sb.append("correct");
 			} else {
 				sb.append("INCORRECT.  expected: ").append(expected).append("; actual: ").append(actual);
 			}
+			header.add(descriptionLabel, BorderLayout.LINE_START);
 		} catch (InterruptedException ie) {
 			throw new RuntimeException(ie);
 		} catch (ExecutionException e) {
 			isCorrect = false;
+			actualOpt = Optional.empty();
 			Throwable t = e.getCause();
-			sb.append("INCORRECT.");
-			header.add(Box.createHorizontalStrut(24));
-			header.add(ThrowableDialogs.newHyperlinkButton(header, t));
+			sb.append("INCORRECT. expected: ").append(expected).append("; actual: ")
+					.append(t.getClass().getSimpleName());
+			AbstractButton button = ThrowableDialogs.newButton(header, t);
+			button.setHorizontalAlignment(SwingConstants.LEFT);
+
+			JPanel pane = new JPanel();
+			pane.setLayout(new BoxLayout(pane, BoxLayout.LINE_AXIS));
+
+			descriptionLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+			button.setVerticalAlignment(SwingConstants.BOTTOM);
+			pane.add(descriptionLabel);
+			pane.add(Box.createHorizontalStrut(12));
+			pane.add(button);
+
+			header.add(pane, BorderLayout.LINE_START);
 			e.printStackTrace();
 		}
 		sb.append("</html>");
@@ -108,11 +131,11 @@ public class ScenarioPane extends JPanel {
 		chartsPane.setLayout(new BoxLayout(chartsPane, BoxLayout.LINE_AXIS));
 
 		chartsPane.add(Box.createHorizontalStrut(24));
-		chartsPane.add(new StudentPane(stones, row0, column0, MaxPathLengthScenarios.calculateActual(scenario)));
+		chartsPane.add(new StudentPane(stones, row0, column0, actualOpt));
 		chartsPane.add(Box.createHorizontalStrut(32));
 		chartsPane.add(new InstructorPane(stones, row0, column0, opts, maxPath));
 
-		add(descriptionLabel, BorderLayout.PAGE_START);
+		add(header, BorderLayout.PAGE_START);
 		add(chartsPane, BorderLayout.LINE_START);
 	}
 

@@ -1,17 +1,16 @@
 
 package assignment6.maxpath.gui;
 
+import java.awt.Color;
+
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
 class CellView extends AbstractCellComponent {
 	private static final long serialVersionUID = 1L;
 
-	private boolean isStone;
-
 	public CellView(int row, int column, boolean isStone) {
 		super(row, column);
-		this.isStone = isStone;
 		setSelected(!isStone);
 	}
 
@@ -22,11 +21,16 @@ class CellView extends AbstractCellComponent {
 
 	@Override
 	public boolean isStone() {
-		return isStone;
+		return !isSelected();
 	}
 
 	@Override
 	protected void updateText(String text) {
 		setText(text);
+	}
+
+	@Override
+	protected void updateColor(Color color) {
+		setBackground(color);
 	}
 }

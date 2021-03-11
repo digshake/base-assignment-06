@@ -45,6 +45,11 @@ public class DragonTest {
 				break;
 			}
 			++i;
+			if (i >= 10) {
+				// the most common incorrect implementation of dragon can produce some long strings
+				// we cut off the testing at 9 to prevent the test suite from taking too long
+				break;
+			}
 		}
 		return args;
 	}

@@ -1,5 +1,6 @@
 package assignment6.tests;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
@@ -17,14 +18,14 @@ import assignment6.maxpath.MaxPathLengthScenarios;
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
 @RunWith(Parameterized.class)
-public class MaxPathLengthTest {
-	private final boolean[][] stones;
+public class MaxPathLengthComprehensiveTest {
+	private final boolean[][] originalChart;
 	private final int row0;
 	private final int col0;
 	private final int expected;
 
-	public MaxPathLengthTest(String description, String scenario) {
-		this.stones = MaxPathLengthScenarios.parseStones(scenario);
+	public MaxPathLengthComprehensiveTest(String description, String scenario) {
+		this.originalChart = MaxPathLengthScenarios.parseStones(scenario);
 		this.row0 = MaxPathLengthScenarios.parseRow0(scenario);
 		this.col0 = MaxPathLengthScenarios.parseColumn0(scenario);
 		this.expected = MaxPathLengthScenarios.lookupExpected(scenario);
@@ -32,7 +33,12 @@ public class MaxPathLengthTest {
 
 	@Test
 	public void test() {
-		int actual = RecursiveMethods.maxPathLength(stones, row0, col0);
+		boolean[][] copyOfChart = MaxPathLengthTestUtils.copy2DArray(originalChart);
+		int actual = RecursiveMethods.maxPathLength(copyOfChart, row0, col0);
+
+		String message = MaxPathLengthTestUtils.toChartNotRestoredToOriginalStateMessage(originalChart, copyOfChart);
+		assertArrayEquals(message, originalChart, copyOfChart);
+		
 		assertEquals(expected, actual);
 	}
 

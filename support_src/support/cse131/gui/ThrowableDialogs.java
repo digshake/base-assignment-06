@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -27,11 +28,17 @@ public class ThrowableDialogs {
 
 	public static HyperlinkButton newHyperlinkButton(JComponent parentComponent, Throwable t) {
 		String message = t.getLocalizedMessage();
-		if (message.length() > 32) {
-			message = message.subSequence(0, 24) + "...";
+		if (message.length() > 48) {
+			message = message.subSequence(0, 40) + "...";
 		}
 		HyperlinkButton button = new HyperlinkButton(
 				"<html>" + t.getClass().getSimpleName() + "<br/>" + message + "</html>");
+		button.addActionListener((e) -> prompt(parentComponent, t));
+		return button;
+	}
+
+	public static JButton newButton(JComponent parentComponent, Throwable t) {
+		JButton button = new JButton("Show Stacktrace...");
 		button.addActionListener((e) -> prompt(parentComponent, t));
 		return button;
 	}

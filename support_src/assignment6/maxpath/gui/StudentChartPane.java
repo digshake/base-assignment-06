@@ -8,9 +8,9 @@ import java.awt.Dimension;
 class StudentChartPane extends ChartPane {
 	private static final long serialVersionUID = 1L;
 
-	public StudentChartPane(boolean[][] stones, int row0, int column0, int actualMaxPathLength) {
+	public StudentChartPane(boolean[][] stones, int row0, int column0, String text) {
 		super(stones, row0, column0);
-		chart[row0][column0].setText(Integer.toString(actualMaxPathLength));
+		chart[row0][column0].setText(text);
 	}
 
 	@Override

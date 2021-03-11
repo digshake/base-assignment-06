@@ -24,5 +24,4 @@ public class PrimitiveArrays {
 	public static List<Double> toListOfDoubles(double[] array) {
 		return Arrays.stream(array).boxed().collect(Collectors.toList());
 	}
-
 }

@@ -48,7 +48,7 @@ abstract class AbstractCellComponent extends JToggleButton {
 			int h = getHeight();
 			int r = h / 8;
 
-			paintYouAreHere((Graphics2D) g, w / 4, r + 4, h / 8);
+			paintYouAreHere((Graphics2D) g, w / 8 + 4, r + 4, h / 8);
 		}
 	}
 
@@ -77,16 +77,18 @@ abstract class AbstractCellComponent extends JToggleButton {
 		size.height = size.width;
 		return size;
 	}
-
+	
 	protected abstract void updateText(String text);
+
+	protected abstract void updateColor(Color color);
 
 	public void updateOpt(Optional<Integer> opt) {
 		String text;
-		setBackground(DEFAULT_COLOR);
+		updateColor(DEFAULT_COLOR);
 		if (opt.isPresent()) {
 			text = Integer.toString(opt.get());
 			if (opt.get() > 0) {
-				setBackground(CONNECTED_COLOR);
+				updateColor(CONNECTED_COLOR);
 			}
 		} else {
 			text = "";
@@ -95,7 +97,7 @@ abstract class AbstractCellComponent extends JToggleButton {
 	}
 
 	public void updateOnMaxPath(int n) {
-		setBackground(ON_MAX_PATH_COLOR);
+		updateColor(ON_MAX_PATH_COLOR);
 		updateText(Integer.toString(n));
 	}
 }

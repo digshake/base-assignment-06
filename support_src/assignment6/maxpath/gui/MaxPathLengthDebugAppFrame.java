@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -28,7 +29,7 @@ import support.cse131.gui.LookAndFeels;
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
-public class MaxPathLengthFrame extends JFrame {
+public class MaxPathLengthDebugAppFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private final JCheckBox displayCorrectResultsCheckBox;
@@ -36,11 +37,11 @@ public class MaxPathLengthFrame extends JFrame {
 	private final JPanel mainPane;
 	private final List<ScenarioPane> scenarioPanes;
 
-	public MaxPathLengthFrame() {
-		super("Max Path Length");
+	public MaxPathLengthDebugAppFrame() {
+		super("Max Path Length Debug App");
 		mainPane = new JPanel();
 		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.PAGE_AXIS));
-
+		mainPane.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		String[] scenarios = MaxPathLengthScenarios.scenariosAsArray();
 
 		List<Callable<Integer>> tasks = new ArrayList<>(scenarios.length);
@@ -91,7 +92,7 @@ public class MaxPathLengthFrame extends JFrame {
 
 		JButton infoButton = new JButton(LookAndFeels.getInformationIcon());
 		infoButton.addActionListener((e) -> {
-			JOptionPane.showMessageDialog(infoButton, "TODO");
+			JOptionPane.showMessageDialog(this, new InformationPane(), "Chart Key", JOptionPane.PLAIN_MESSAGE);
 		});
 
 		JPanel header = new JPanel();
@@ -102,6 +103,7 @@ public class MaxPathLengthFrame extends JFrame {
 
 		getContentPane().add(header, BorderLayout.PAGE_START);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		SwingUtilities.invokeLater(() -> mainPane.requestFocusInWindow());
 	}
 
 	private void updateResultsViews() {
@@ -128,7 +130,7 @@ public class MaxPathLengthFrame extends JFrame {
 			e.printStackTrace();
 		}
 
-		JFrame frame = new MaxPathLengthFrame();
+		JFrame frame = new MaxPathLengthDebugAppFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
