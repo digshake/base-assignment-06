@@ -14,7 +14,7 @@ import assignment6.RecursiveMethods;
  */
 @SuppressWarnings("unchecked")
 public class MaxPathLengthScenarios {
-	//	static Map<String, Optional<Integer>[][]> map = new LinkedHashMap<>();
+	// static Map<String, Optional<Integer>[][]> map = new LinkedHashMap<>();
 	static Map<String, MaxPathLengthScenario> map = new LinkedHashMap<>();
 	static {
 		map.put("1X1;r=0;c=0;[.]",
@@ -310,6 +310,87 @@ public class MaxPathLengthScenarios {
 								new Cell(8, 3), new Cell(8, 4), new Cell(8, 5), new Cell(8, 6), new Cell(8, 7),
 								new Cell(7, 7), new Cell(6, 7), new Cell(5, 7), new Cell(5, 6), new Cell(5, 5),
 								new Cell(4, 5), new Cell(3, 5), new Cell(2, 5))));
+		map.put("5X5;r=0;c=2;[..*..][..*..][..***][..*.*][*****]",
+				new MaxPathLengthScenario("cycle down right down left",
+						new Optional[][] {
+								{ Optional.empty(), Optional.of(0), Optional.of(11), Optional.of(0), Optional.empty() },
+								{ Optional.empty(), Optional.of(0), Optional.of(10), Optional.of(0), Optional.of(0) },
+								{ Optional.empty(), Optional.of(0), Optional.of(9), Optional.of(8), Optional.of(7) },
+								{ Optional.of(0), Optional.of(0), Optional.of(7), Optional.of(0), Optional.of(6) },
+								{ Optional.of(1), Optional.of(2), Optional.of(3), Optional.of(4), Optional.of(5) } },
+						Arrays.asList(new Cell(0, 2), new Cell(1, 2), new Cell(2, 2), new Cell(2, 3), new Cell(2, 4),
+								new Cell(3, 4), new Cell(4, 4), new Cell(4, 3), new Cell(4, 2), new Cell(4, 1),
+								new Cell(4, 0))));
+		map.put("5X5;r=0;c=2;[..*..][..*..][***..][*.*..][*****]",
+				new MaxPathLengthScenario("cycle down left down right",
+						new Optional[][] {
+								{ Optional.empty(), Optional.of(0), Optional.of(11), Optional.of(0), Optional.empty() },
+								{ Optional.of(0), Optional.of(0), Optional.of(10), Optional.of(0), Optional.empty() },
+								{ Optional.of(7), Optional.of(8), Optional.of(9), Optional.of(0), Optional.empty() },
+								{ Optional.of(6), Optional.of(0), Optional.of(7), Optional.of(0), Optional.of(0) },
+								{ Optional.of(5), Optional.of(4), Optional.of(3), Optional.of(2), Optional.of(1) } },
+						Arrays.asList(new Cell(0, 2), new Cell(1, 2), new Cell(2, 2), new Cell(2, 1), new Cell(2, 0),
+								new Cell(3, 0), new Cell(4, 0), new Cell(4, 1), new Cell(4, 2), new Cell(4, 3),
+								new Cell(4, 4))));
+		map.put("5X5;r=2;c=4;[*....][*....][*****][*.*..][***..]", new MaxPathLengthScenario("cycle left down left up",
+				new Optional[][] {
+						{ Optional.of(1), Optional.of(0), Optional.empty(), Optional.empty(), Optional.empty() },
+						{ Optional.of(2), Optional.of(0), Optional.of(0), Optional.of(0), Optional.of(0) },
+						{ Optional.of(6), Optional.of(7), Optional.of(9), Optional.of(10), Optional.of(11) },
+						{ Optional.of(5), Optional.of(0), Optional.of(8), Optional.of(0), Optional.of(0) },
+						{ Optional.of(4), Optional.of(3), Optional.of(2), Optional.of(0), Optional.empty() } },
+				Arrays.asList(new Cell(2, 4), new Cell(2, 3), new Cell(2, 2), new Cell(3, 2), new Cell(4, 2),
+						new Cell(4, 1), new Cell(4, 0), new Cell(3, 0), new Cell(2, 0), new Cell(1, 0),
+						new Cell(0, 0))));
+		map.put("5X5;r=2;c=4;[***..][*.*..][*****][*....][*....]", new MaxPathLengthScenario(
+				"cycle left up left right down",
+				new Optional[][] { { Optional.of(4), Optional.of(3), Optional.of(2), Optional.of(0), Optional.empty() },
+						{ Optional.of(5), Optional.of(0), Optional.of(8), Optional.of(0), Optional.of(0) },
+						{ Optional.of(6), Optional.of(7), Optional.of(9), Optional.of(10), Optional.of(11) },
+						{ Optional.of(2), Optional.of(0), Optional.of(0), Optional.of(0), Optional.of(0) },
+						{ Optional.of(1), Optional.of(0), Optional.empty(), Optional.empty(), Optional.empty() } },
+				Arrays.asList(new Cell(2, 4), new Cell(2, 3), new Cell(2, 2), new Cell(1, 2), new Cell(0, 2),
+						new Cell(0, 1), new Cell(0, 0), new Cell(1, 0), new Cell(2, 0), new Cell(3, 0),
+						new Cell(4, 0))));
+		map.put("5X5;r=4;c=2;[*****][*.*..][***..][..*..][..*..]", new MaxPathLengthScenario("cycle up left up right",
+				new Optional[][] { { Optional.of(5), Optional.of(4), Optional.of(3), Optional.of(2), Optional.of(1) },
+						{ Optional.of(6), Optional.of(0), Optional.of(7), Optional.of(0), Optional.of(0) },
+						{ Optional.of(7), Optional.of(8), Optional.of(9), Optional.of(0), Optional.empty() },
+						{ Optional.of(0), Optional.of(0), Optional.of(10), Optional.of(0), Optional.empty() },
+						{ Optional.empty(), Optional.of(0), Optional.of(11), Optional.of(0), Optional.empty() } },
+				Arrays.asList(new Cell(4, 2), new Cell(3, 2), new Cell(2, 2), new Cell(2, 1), new Cell(2, 0),
+						new Cell(1, 0), new Cell(0, 0), new Cell(0, 1), new Cell(0, 2), new Cell(0, 3),
+						new Cell(0, 4))));
+		map.put("5X5;r=4;c=2;[*****][..*.*][..***][..*..][..*..]", new MaxPathLengthScenario("cycle up right up left",
+				new Optional[][] { { Optional.of(1), Optional.of(2), Optional.of(3), Optional.of(4), Optional.of(5) },
+						{ Optional.of(0), Optional.of(0), Optional.of(7), Optional.of(0), Optional.of(6) },
+						{ Optional.empty(), Optional.of(0), Optional.of(9), Optional.of(8), Optional.of(7) },
+						{ Optional.empty(), Optional.of(0), Optional.of(10), Optional.of(0), Optional.of(0) },
+						{ Optional.empty(), Optional.of(0), Optional.of(11), Optional.of(0), Optional.empty() } },
+				Arrays.asList(new Cell(4, 2), new Cell(3, 2), new Cell(2, 2), new Cell(2, 3), new Cell(2, 4),
+						new Cell(1, 4), new Cell(0, 4), new Cell(0, 3), new Cell(0, 2), new Cell(0, 1),
+						new Cell(0, 0))));
+		map.put("5X5;r=2;c=0;[..***][..*.*][*****][....*][....*]", new MaxPathLengthScenario(
+				"cycle right up right down",
+				new Optional[][] { { Optional.empty(), Optional.of(0), Optional.of(2), Optional.of(3), Optional.of(4) },
+						{ Optional.of(0), Optional.of(0), Optional.of(8), Optional.of(0), Optional.of(5) },
+						{ Optional.of(11), Optional.of(10), Optional.of(9), Optional.of(7), Optional.of(6) },
+						{ Optional.of(0), Optional.of(0), Optional.of(0), Optional.of(0), Optional.of(2) },
+						{ Optional.empty(), Optional.empty(), Optional.empty(), Optional.of(0), Optional.of(1) } },
+				Arrays.asList(new Cell(2, 0), new Cell(2, 1), new Cell(2, 2), new Cell(1, 2), new Cell(0, 2),
+						new Cell(0, 3), new Cell(0, 4), new Cell(1, 4), new Cell(2, 4), new Cell(3, 4),
+						new Cell(4, 4))));
+		map.put("5X5;r=2;c=0;[....*][....*][*****][..*.*][..***]", new MaxPathLengthScenario(
+				"cycle right down right up",
+				new Optional[][] {
+						{ Optional.empty(), Optional.empty(), Optional.empty(), Optional.of(0), Optional.of(1) },
+						{ Optional.of(0), Optional.of(0), Optional.of(0), Optional.of(0), Optional.of(2) },
+						{ Optional.of(11), Optional.of(10), Optional.of(9), Optional.of(7), Optional.of(6) },
+						{ Optional.of(0), Optional.of(0), Optional.of(8), Optional.of(0), Optional.of(5) },
+						{ Optional.empty(), Optional.of(0), Optional.of(2), Optional.of(3), Optional.of(4) } },
+				Arrays.asList(new Cell(2, 0), new Cell(2, 1), new Cell(2, 2), new Cell(3, 2), new Cell(4, 2),
+						new Cell(4, 3), new Cell(4, 4), new Cell(3, 4), new Cell(2, 4), new Cell(1, 4),
+						new Cell(0, 4))));
 	}
 
 	public static List<String> scenariosAsList() {
