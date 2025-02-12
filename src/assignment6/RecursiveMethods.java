@@ -32,30 +32,6 @@ public class RecursiveMethods {
 	}
 
 	/**
-	 * Return a new String which is the original source String with all occurrences
-	 * of the target character substituted by the replacement String.
-	 * 
-	 * @param source      the source String
-	 * @param target      the target character to be replaced
-	 * @param replacement the replacement String
-	 * 
-	 * @return the String which results from substituting all of the target
-	 *         characters in the source String with the replacement String
-	 */
-	public static String substituteAll(String source, char target, String replacement) {
-		String result = "";
-		for (int i = 0; i < source.length(); ++i) {
-			char ch = source.charAt(i);
-			if (ch == target) {
-				result = result + replacement;
-			} else {
-				result = result + ch;
-			}
-		}
-		return result;
-	}
-
-	/**
 	 * Recursively computes string representations of dragon curves
 	 * 
 	 * @param n the desired degree of the dragon curve
